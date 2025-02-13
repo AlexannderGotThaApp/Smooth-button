@@ -1,0 +1,113 @@
+.button {
+background-color: rgb(0, 120, 255);
+color: white;
+border: none;
+border-radius: 5px;
+padding: 15px 25px;
+font-size: 16px;
+cursor: pointer;
+transition: background-color 0.5s ease; / Smooth background color transition */
+}
+
+/* Button hover effect */
+.button:hover {
+background-color: rgb(30, 144, 255);
+}
+
+/* Hidden text initially */
+.prompt {
+display: none;
+font-size: 18px;
+margin-top: 20px;
+}
+
+/* Modal styles for response selection /
+.modal {
+display: none; / Hidden by default */
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background-color: rgba(255, 255, 255, 0.9);
+padding: 20px;
+border: 2px solid rgb(0, 120, 255);
+border-radius: 10px;
+box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+z-index: 1000;
+}
+
+/* Modal text style */
+.modal p {
+font-size: 14px;
+}
+
+/* Input box styling /
+.input-box {
+display: none; / Hidden by default */
+margin-top: 10px;
+}
+
+/* IP ban message styles /
+.ban-message {
+display: none; / Hidden by default */
+font-size: 16pt;
+color: red;
+margin-top: 10px;
+}
+
+/* Button for modal actions /
+.modal-button {
+background-color: rgb(255, 0, 0);
+color: white;
+border: none;
+border-radius: 5px;
+padding: 10px 20px;
+cursor: pointer;
+margin-top: 10px;
+transition: background-color 0.3s ease; / Smooth hover effect */
+}
+
+.modal-button:hover {
+background-color: rgb(200, 0, 0);
+}
+
+JavaScript (functionality)
+
+To make your button interactive and implement the required functionality, you can add the following JavaScript code to your HTML:
+javascript
+document.querySelector('.button').addEventListener('click', function() {
+this.style.backgroundColor = 'rgb(50, 50, 50)'; // Change to dark background
+document.querySelector('.prompt').style.display = 'block';
+document.querySelector('.prompt').textContent = 'Do you like apples?';
+
+// Display modal options
+setTimeout(() => {
+const modal = document.querySelector('.modal');
+modal.style.display = 'block';
+}, 500);
+});
+
+function response(answer) {
+const inputBox = document.querySelector('.input-box');
+const banMessage = document.querySelector('.ban-message');
+const modal = document.querySelector('.modal');
+const banButton = document.querySelector('.modal-button');
+
+if (answer === 'yes') {
+inputBox.style.display = 'block'; // Show input box
+} else {
+modal.innerHTML = `
+
+Sorry, you're banned. Try again later.
+
+Next time don't waste food<button class="modal-button" onclick="kickUser()">OK`;
+banMessage.style.display = 'block';
+}
+}
+
+function kickUser() {
+window.location.href = "about:blank"; // Redirect to a blank page
+setTimeout(() => {
+alert("You can come back after 1 hour.");
+}, 100);
+}
